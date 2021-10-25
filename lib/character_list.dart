@@ -14,11 +14,12 @@ class _MyHomePageState extends State<MyHomePage> {
   String data;
   var superheros_length;
   CharactersApi charactersApi = CharactersApi();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
+    charactersApi.getCharacters();
   }
 
   void getData() async {
@@ -59,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 500,
                   alignment: Alignment.center,
                 ),
-                title: Text(jsonDecode(data)['data']['results'][index]['name']),
+                title: Text(superheros_length[index]['name']),
                 onTap: () {
                   Navigator.push(
                       context,
