@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:marvel/character_detail.dart';
-import 'package:marvel/services/characters_api.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -13,13 +11,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String data;
   var superheros_length;
-  CharactersApi charactersApi = CharactersApi();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    charactersApi.getCharacters();
+    getData();
   }
 
   void getData() async {
@@ -60,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 500,
                   alignment: Alignment.center,
                 ),
-                title: Text(superheros_length[index]['name']),
+                title: Text(jsonDecode(data)['data']['results'][index]['name']),
                 onTap: () {
                   Navigator.push(
                       context,
